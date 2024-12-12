@@ -9,7 +9,6 @@ def inserir_form(i):
     cur= con.cursor ()
     query = "INSERT INTO inventario(nome,descricao,marca,quantidade,data_da_compra,valor_da_compra,serie, imagem) VALUES(?,?,?,?,?,?,?,?)"
     cur.execute(query,i)
-
 ### ver dados 
 def ver_form():
   ver_dados=[]
