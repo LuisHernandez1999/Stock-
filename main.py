@@ -62,7 +62,7 @@ entrada_marca.place(x= 130, y= 72)
 
 l_data_compra= Label(frameMeio, text="Data da compra ", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
 l_data_compra.place(x= 10, y=100)
-entrada_data_compra= DateEntry(frameMeio, width=30, justify='left',relief=SOLID)
+entrada_data_compra= DateEntry(frameMeio, width=14, justify='left',relief=SOLID)
 entrada_data_compra.place(x= 130, y= 101)
 
 l_quantidade= Label(frameMeio, text="Quantidade", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
