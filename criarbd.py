@@ -21,7 +21,6 @@ with con:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT,
             fornecedor_id INTEGER,
-            local TEXT,
             descricao TEXT,
             marca TEXT,
             data_da_compra DATE,
