@@ -55,19 +55,19 @@ l_descricao.place(x= 10, y=40)
 entrada_descricao= Entry(frameMeio, width=30, justify='left',relief=SOLID)
 entrada_descricao.place(x= 130, y= 41)
 
-l_marca= Label(frameMeio, text="Marca", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
-l_marca.place(x= 10, y=70)
-entrada_marca= Entry(frameMeio, width=30, justify='left',relief=SOLID)
-entrada_marca.place(x= 130, y= 72)
+l_valor= Label(frameMeio, text="Valor", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
+l_valor.place(x= 10, y=70)
+entrada_valor= Entry(frameMeio, width=30, justify='left',relief=SOLID)
+entrada_valor.place(x= 130, y= 72)
 
 l_data_compra= Label(frameMeio, text="Data da compra ", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
 l_data_compra.place(x= 10, y=100)
-entrada_data_compra= DateEntry(frameMeio, width=14, justify='left',relief=SOLID)
+entrada_data_compra= DateEntry(frameMeio, width=30, justify='left',relief=SOLID)
 entrada_data_compra.place(x= 130, y= 101)
 
 l_quantidade= Label(frameMeio, text="Quantidade", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
 l_quantidade.place(x= 10, y=132)
-entrada_quantidade = Spinbox(frameMeio, from_=0, to=100, width=10, justify='center', relief=SOLID)
+entrada_quantidade = Spinbox(frameMeio, from_=0, to=100, width=30, justify='center', relief=SOLID)
 entrada_quantidade.place(x= 130, y= 133)
 
 l_serie= Label(frameMeio, text="Número de série ", height=1, anchor=NW, font=('Ivy 10 bold'), bg= co1,fg =co4)
@@ -85,6 +85,26 @@ b_carregar.place(x=140, y=191)
 img_add = Image.open('addbtt.png')
 img_add = img_add.resize((20,20))
 img_add = ImageTk.PhotoImage(img_add)
+######## criando funcoes 
+global tree
+
+### inserir 
+def inserir():
+    global imagem, imagem_string, l_imagem
+
+    nome= entrada_nome.get()
+    descricao= entrada_descricao.get()
+    quantidade= entrada_quantidade.get()
+    data=entrada_data_compra.get()
+    valor= entrada_valor.get()
+    serie= entrada_serie.get()
+    imagem= imagem_string
+
+    listra_inserir = [nome,descricao,quantidade,data,valor,serie,imagem]
+
+    ### if i =='':
+            
+    
 
 
 b_inserir= Button(frameMeio, image=img_add,width=95,text='Adicionar'.upper(),compound=LEFT, anchor=NW, overrelief=RIDGE,font=('Ivy 8 '),bg=co1,fg=co0)
@@ -138,7 +158,7 @@ tabela_head = ['#Item','Nome', 'Descrição', 'Marca', 'Data da compra','Quantid
 
 lista_itens = []
 
-global tree
+
 
 tree = ttk.Treeview(frameBaixo, selectmode="extended",columns=tabela_head, show="headings")
 

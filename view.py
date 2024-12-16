@@ -100,15 +100,22 @@ def ver_item_fornecedor(id):
         cur.execute(query, (id,))
         return cur.fetchall()
 ### totais 
-def ver_totais():
+def quantidade_total_estoque():
+    with con:
+        cur = con.cursor()
+        query = "SELECT SUM(quantidade) AS total_quantidade FROM inventario"
+        cur.execute(query)
+        resultado = cur.fetchone()
+        return resultado[0] if resultado[0] else 0  # Retorna 0 se o resultado for None
+
+# exibir o valor total do estoque
+def valor_total_estoque():
     with con:
         cur = con.cursor()
         query = """
-            SELECT 
-                SUM(quantidade) AS total_quantidade,
-                SUM(quantidade * valor_da_compra) AS valor_total_estoque
+            SELECT SUM(quantidade * valor_da_compra) AS total_valor
             FROM inventario
         """
         cur.execute(query)
         resultado = cur.fetchone()
-        return resultado
+        return resultado[0] if resultado[0] else 0.0  # Retorna 0.0 se o resultado for None
