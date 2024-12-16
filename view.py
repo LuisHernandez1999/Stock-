@@ -99,3 +99,16 @@ def ver_item_fornecedor(id):
         query = "SELECT * FROM fornecedor WHERE id=?"
         cur.execute(query, (id,))
         return cur.fetchall()
+### totais 
+def ver_totais():
+    with con:
+        cur = con.cursor()
+        query = """
+            SELECT 
+                SUM(quantidade) AS total_quantidade,
+                SUM(quantidade * valor_da_compra) AS valor_total_estoque
+            FROM inventario
+        """
+        cur.execute(query)
+        resultado = cur.fetchone()
+        return resultado
