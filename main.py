@@ -207,12 +207,12 @@ def mostrar():
       tree.insert('', 'end', values=item)
 
 # Obter os totais diretamente das funções
-Total_quantidade = quantidade_total_estoque()  # Função que calcula a soma da quantidade
-Total_valor = valor_total_estoque()            # Função que calcula o valor total do estoque
+   Total_quantidade = quantidade_total_estoque()  # Função que calcula a soma da quantidade
+   Total_valor = valor_total_estoque()            # Função que calcula o valor total do estoque
 
 # Atualizar os labels com os valores calculados
-l_quantidade_total['text'] = f"Total de Itens: {Total_quantidade}"
-l_total['text'] = 'R$ {:,.2f}'.format(Total_valor)
+   l_quantidade_total['text'] = f"Total de Itens: {Total_quantidade}"
+   l_total['text'] = 'R$ {:,.2f}'.format(Total_valor)
 
 mostrar()
 
