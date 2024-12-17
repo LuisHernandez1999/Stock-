@@ -1,10 +1,12 @@
 from tkinter import *
 from tkinter import Tk,StringVar, ttk
-
+import tkinter.messagebox
 from PIL import Image, ImageTk
 
 from tkcalendar import Calendar, DateEntry
 from datetime import date
+
+from view import * 
 
 co0 = "#2e2d2b"
 co1 = "#feffff"
@@ -102,7 +104,23 @@ def inserir():
 
     listra_inserir = [nome,descricao,quantidade,data,valor,serie,imagem]
 
-    ### if i =='':
+    for i in listra_inserir:
+        if i =="":
+            tkinter.messagebox.showerror('Erro','Preencha todos os campos')
+            return 
+    inserir_form(listra_inserir)
+    tkinter.messagebox.showinfo('Sucesso','Os dados foram inseridos')
+
+    nome.delete(0,'end')
+    descricao.delete(0,'end')
+    quantidade.delete(0,'end')
+    data.delete(0,'end')
+    valor.delete(0,'end')
+    serie.delete(0,'end')
+
+    for widget in frameMeio.winfo_children():
+         widget.destroy()
+    
             
     
 
@@ -151,34 +169,33 @@ l_quantidade_total.place(x= 510, y=97)
 l_quantidade_total= Label(frameMeio, text="Quantidade total", anchor=NW, font=('Ivy 17 bold'), bg= co7,fg =co1)
 l_quantidade_total.place(x= 520, y=107)
 
+def mostrar():
+   
+   tabela_head = ['#Item','Nome', 'Descrição', 'Marca', 'Data da compra','Quantidade', 'Número de série','Fornecedor']
+
+   lista_itens = []
 
 
-## creating a treeview with dual scrollbars
-tabela_head = ['#Item','Nome', 'Descrição', 'Marca', 'Data da compra','Quantidade', 'Número de série','Fornecedor']
 
-lista_itens = []
+   tree = ttk.Treeview(frameBaixo, selectmode="extended",columns= tabela_head, show="headings")
 
-
-
-tree = ttk.Treeview(frameBaixo, selectmode="extended",columns=tabela_head, show="headings")
-
-## vertical scrollbar
-vsb = ttk.Scrollbar(frameBaixo, orient="vertical", command=tree.yview)
+  ## vertical scrollbar
+   vsb = ttk.Scrollbar(frameBaixo, orient="vertical", command=tree.yview)
 
 ## horizontal scrollbar
-hsb = ttk.Scrollbar(frameBaixo, orient="horizontal", command=tree.xview)
+   hsb = ttk.Scrollbar(frameBaixo, orient="horizontal", command=tree.xview)
 
-tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-tree.grid(column=0, row=0, sticky='nsew')
-vsb.grid(column=1, row=0, sticky='ns')
-hsb.grid(column=0, row=1, sticky='ew')
-frameBaixo.grid_rowconfigure(0, weight=12)
+   tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+   tree.grid(column=0, row=0, sticky='nsew')
+   vsb.grid(column=1, row=0, sticky='ns')
+   hsb.grid(column=0, row=1, sticky='ew')
+   frameBaixo.grid_rowconfigure(0, weight=12)
+ 
+   hd=["center","center","center","center","center","center","center", 'center']
+   h=[40,150,100,160,130,100,100, 100]
+   n=0
 
-hd=["center","center","center","center","center","center","center", 'center']
-h=[40,150,100,160,130,100,100, 100]
-n=0
-
-for col in tabela_head:
+   for col in tabela_head:
     tree.heading(col, text=col.title(), anchor=CENTER)
   
     tree.column(col, width=h[n],anchor=hd[n])
@@ -186,19 +203,18 @@ for col in tabela_head:
 
 
 ##inserindo os itens dentro da tabela
-for item in lista_itens:
-    tree.insert('', 'end', values=item)
+    for item in lista_itens:
+      tree.insert('', 'end', values=item)
 
+# Obter os totais diretamente das funções
+Total_quantidade = quantidade_total_estoque()  # Função que calcula a soma da quantidade
+Total_valor = valor_total_estoque()            # Função que calcula o valor total do estoque
 
-quantidade = [8888,88]
-
-for iten in lista_itens:
-    quantidade.append(iten[6])
-
-Total_valor = sum(quantidade)
-Total_itens = len(quantidade)
-
+# Atualizar os labels com os valores calculados
+l_quantidade_total['text'] = f"Total de Itens: {Total_quantidade}"
 l_total['text'] = 'R$ {:,.2f}'.format(Total_valor)
- ## l_qtd['text'] = Total_itens
+
+mostrar()
+
 
 janela.mainloop()
